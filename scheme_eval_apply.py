@@ -34,6 +34,12 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
     else:
         # BEGIN PROBLEM 3
         "*** YOUR CODE HERE ***"
+        # this doesn't work
+        if scheme_procedurep(first):
+           return scheme_apply(scheme_eval(first, env), scheme_eval(rest, env), env)
+        else:
+            return Pair(scheme_eval(first, env), scheme_eval(rest, env))
+
         # END PROBLEM 3
 
 def scheme_apply(procedure, args, env):
