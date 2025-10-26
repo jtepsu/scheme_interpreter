@@ -34,12 +34,9 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
     else:
         # BEGIN PROBLEM 3
         "*** YOUR CODE HERE ***"
-        # this doesn't work
-        if scheme_procedurep(scheme_eval(first, env)):
-           return scheme_apply(scheme_eval(first, env), scheme_eval(rest, env), env)
-        else:
-            return Pair(scheme_eval(first, env), scheme_eval(rest, env))
-
+        operator = scheme_eval(first, env)
+        operands = rest.map(lambda operand: scheme_eval(operand, env))
+        return scheme_apply(operator, operands, env)
         # END PROBLEM 3
 
 def scheme_apply(procedure, args, env):
@@ -74,6 +71,7 @@ def scheme_apply(procedure, args, env):
         "*** YOUR CODE HERE ***"
         # END PROBLEM 11
     else:
+        raise SchemeError(f'Cannot apply non-procedure: {repl_str(procedure)}') # experimental edition
         assert False, "Unexpected procedure: {}".format(procedure)
 
 def eval_all(expressions, env):
